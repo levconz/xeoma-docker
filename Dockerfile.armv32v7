@@ -1,0 +1,19 @@
+FROM debian:stretch
+
+RUN apt-get update && apt-get install --no-install-recommends -y curl procps 
+
+WORKDIR /root
+
+RUN curl -o xeoma_linux_arm7.tgz http://felenasoft.com/xeoma/downloads/xeoma_linux_arm7.tgz && \
+ tar -xvf xeoma_linux_arm7.tgz && \
+ ./xeoma.app -install -allmanual && \
+ apt-get remove -y curl && apt-get -y clean && \
+ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY xeoma.sh /root
+
+CMD ["/root/xeoma.sh"]
+
+VOLUME /usr/local/Xeoma 
+
+EXPOSE 8090
