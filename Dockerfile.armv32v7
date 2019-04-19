@@ -12,7 +12,7 @@ RUN curl -o xeoma_linux_arm7.tgz http://felenasoft.com/xeoma/downloads/xeoma_lin
 
 COPY xeoma.sh /root
 
-CMD ["/root/xeoma.sh"]
+CMD bash /root/xeoma.sh
 
 VOLUME /usr/local/Xeoma 
 
