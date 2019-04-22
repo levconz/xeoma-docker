@@ -12,4 +12,4 @@ then
 fi
 
 /root/bin/Xeoma/xeoma -showpassword
-/root/bin/Xeoma/xeoma -core -service -log -startdelay 5 -forced
+/root/bin/Xeoma/xeoma -core -service -log -startdelay 5
