@@ -1,0 +1,19 @@
+FROM debian:buster
+
+RUN apt-get update && apt-get install --no-install-recommends -y curl procps 
+
+WORKDIR /root
+
+RUN curl -o xeoma_linux.tgz http://felenasoft.com/xeoma/downloads/2020-02-13/linux/xeoma_linux_arm8.tgz && \
+ tar -xvf xeoma_linux.tgz && \
+ ./xeoma.app -install -allmanual && \
+ apt-get remove -y curl && apt-get -y clean && \
+ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY xeoma.sh /root
+
+CMD bash /root/xeoma.sh
+
+VOLUME /usr/local/Xeoma 
+
+EXPOSE 8090

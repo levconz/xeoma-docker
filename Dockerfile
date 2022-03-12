@@ -1,15 +1,15 @@
 # Use phusion/baseimage as base image.
-FROM phusion/baseimage:0.10.0
+FROM phusion/baseimage:master
 LABEL MAINTAINER="anthony@relle.co.uk"
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
 # Install prerequisites
-RUN apt-get update && apt-get -y upgrade && \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade && \
 	apt-get install -y libasound2
 # Grab latest 64bit and install
-RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_beta_linux64.tgz && \
+RUN curl -o /root/xeoma_linux64.tgz https://felenasoft.com/xeoma/downloads/2020-02-13/linux/xeoma_linux64.tgz && \
 	tar -xvzf /root/xeoma_linux64.tgz -C /root && \
 	/root/xeoma.app -install -allmanual && \
 	rm /root/xeoma_linux64.tgz
