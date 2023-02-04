@@ -9,9 +9,9 @@ CMD ["/sbin/my_init"]
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade && \
 	apt-get install -y libasound2
 # Grab latest 64bit and install
-RUN curl -o /root/xeoma_linux64.tgz https://felenasoft.com/xeoma/downloads/2020-02-13/linux/xeoma_linux64.tgz && \
+RUN curl -o /root/xeoma_linux64.tgz https://felenasoft.com/xeoma/downloads/latest/linux/xeoma_linux64.tgz && \
 	tar -xvzf /root/xeoma_linux64.tgz -C /root && \
-	/root/xeoma.app -install -allmanual && \
+	/root/xeoma.app -install -hiddenmode && \
 	rm /root/xeoma_linux64.tgz
 
 # Set up the force first run
@@ -27,5 +27,6 @@ VOLUME /usr/local/Xeoma
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Expose the port
+# Expose the ports
 EXPOSE 8090
+EXPOSE 10090
